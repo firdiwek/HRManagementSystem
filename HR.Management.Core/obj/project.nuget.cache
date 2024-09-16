@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "BL2tUz8vjaI=",
+  "success": true,
+  "projectFilePath": "/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/HR.Management.Core.csproj",
+  "expectedPackageFiles": [
+    "/Users/firdu/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
+    "/Users/firdu/.nuget/packages/mediatr/11.0.0/mediatr.11.0.0.nupkg.sha512",
+    "/Users/firdu/.nuget/packages/mediatr.contracts/1.0.1/mediatr.contracts.1.0.1.nupkg.sha512",
+    "/Users/firdu/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/11.1.0/mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
+    "/Users/firdu/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "/Users/firdu/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "/Users/firdu/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/Users/firdu/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,12 @@
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/bin/Debug/net8.0/HR.Management.Core.deps.json
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/bin/Debug/net8.0/HR.Management.Core.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/bin/Debug/net8.0/HR.Management.Core.pdb
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/HR.Management.Core.csproj.AssemblyReference.cache
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/HR.Management.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/HR.Management.Core.AssemblyInfoInputs.cache
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/HR.Management.Core.AssemblyInfo.cs
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/HR.Management.Core.csproj.CoreCompileInputs.cache
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/HR.Management.Core.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/refint/HR.Management.Core.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/HR.Management.Core.pdb
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Management.Core/obj/Debug/net8.0/ref/HR.Management.Core.dll

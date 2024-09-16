@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "oD9NopEnIgP27d8woOdnsMRgy1ZxuNi07vnnkCfpbwY=",
+  "Source": "HRManagement.WebApi",
+  "BasePath": "_content/HRManagement.WebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

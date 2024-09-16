@@ -1,0 +1,17 @@
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/bin/Debug/net8.0/HRManagement.Infrastructure.deps.json
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/bin/Debug/net8.0/HRManagement.Infrastructure.runtimeconfig.json
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/bin/Debug/net8.0/HRManagement.Infrastructure.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/bin/Debug/net8.0/HRManagement.Infrastructure.pdb
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/bin/Debug/net8.0/HR.Management.Core.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/bin/Debug/net8.0/HR.Management.Core.pdb
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.csproj.AssemblyReference.cache
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.AssemblyInfoInputs.cache
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.AssemblyInfo.cs
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManage.5C57F789.Up2Date
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/refint/HRManagement.Infrastructure.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.pdb
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.genruntimeconfig.cache
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/ref/HRManagement.Infrastructure.dll
