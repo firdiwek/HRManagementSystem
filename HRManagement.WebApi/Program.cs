@@ -9,6 +9,11 @@ using HR.Management.Application.Handlers;
 using HR.Management.Application.Contracts.Persistence;
 using HR.Management.Persistence.Repositories;
 using HR.Management.Application.Features.AttendanceRecords.Requests.Commands;
+using HR.Management.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +21,41 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnectionForHR")));
 
+// Add Identity services
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+
+    // Add JWT Authentication
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("d12454a94e3022c066ac92f2c8214fbebd19ea07f45e008bcd5cd1e7fba2349d2d4ad8e7842925a143ab692841238a4c750881dab9aef3c78d9a48f65985251a3632c165868f4fc443df130470d34de1b9f599b0b275f0677b9abeda1cc2999ebbe0d494cb913e8a69491db2259bc99340808d04d8e532d23b4ffc146880697d5cef93620591ae5b9713a7bddad869bd47c79849ce4665ff41539483c3197c7206862dba3e945aca39bcc0872cb39e072063688dacef1912ba2534af401290d064e73b94fe26a22372b7a064b50777b70d55a3dd384742971c5743511349c5fdc523d96272e2221931930a27039bc41c97647ae15bd4d7cd7994e553799b655c"))
+    };
+});
+
+
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("HRPolicy", policy => policy.RequireRole("HR"));
+});
 // Other service configurations
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -38,6 +78,13 @@ builder.Services.AddTransient<IAttendanceRecordRepository, AttendanceRecordRepos
 builder.Services.AddMediatR(typeof(CreateAttendanceRecordCommand).Assembly);
 
 
+
+
+
+
+
+
+
 // Add Swagger services
 builder.Services.AddSwaggerGen(c =>
 {
@@ -51,9 +98,53 @@ builder.Services.AddSwaggerGen(c =>
     // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     // c.IncludeXmlComments(xmlPath);
+
+    // Add JWT authentication support in Swagger
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 
 var app = builder.Build();
+// Seed roles and users here
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        // Call the seeding method
+        await ApplicationDbContextSeed.SeedRolesAndUsers(services);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
+
+
+
+
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -66,6 +157,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
+app.UseAuthentication(); // Enable JWT Authentication
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

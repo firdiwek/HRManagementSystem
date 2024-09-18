@@ -5,10 +5,13 @@ using HR.Management.Application.DTOs;
 using HR.Management.Application.Features.Employees.Requests.Commands;
 using HR.Management.Application.Features.Employees.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HR.Management.WebApi.Controllers
 {
+    
     [ApiController]
+    [Authorize(Roles ="Admin , HR")]
     [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {

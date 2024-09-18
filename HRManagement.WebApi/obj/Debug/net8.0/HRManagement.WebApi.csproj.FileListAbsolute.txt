@@ -145,3 +145,11 @@
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/obj/Debug/net8.0/HRManagement.WebApi.pdb
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/obj/Debug/net8.0/HRManagement.WebApi.genruntimeconfig.cache
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/obj/Debug/net8.0/ref/HRManagement.WebApi.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/obj/Debug/net8.0/HRManagement.WebApi.sourcelink.json
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/bin/Debug/net8.0/Microsoft.Extensions.Identity.Core.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.WebApi/bin/Debug/net8.0/Microsoft.Extensions.Options.dll

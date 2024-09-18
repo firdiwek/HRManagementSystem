@@ -15,3 +15,4 @@
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.pdb
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.genruntimeconfig.cache
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/ref/HRManagement.Infrastructure.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HRManagement.Infrastructure/obj/Debug/net8.0/HRManagement.Infrastructure.sourcelink.json
