@@ -19,15 +19,7 @@
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.SqlServer.dll
-/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Caching.Abstractions.dll
-/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll
-/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll
-/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
-/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
-/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Logging.dll
-/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
-/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Identity.Client.dll
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Identity.Client.Extensions.Msal.dll
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
@@ -154,3 +146,10 @@
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/obj/Debug/net8.0/ref/HR.Tests.dll
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Npgsql.dll
 /Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Identity.Core.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/firdu/THE LAST PROJECT OF HR SYSTEM/HRManagementSystem/HR.Tests/obj/Debug/net8.0/HR.Tests.sourcelink.json
