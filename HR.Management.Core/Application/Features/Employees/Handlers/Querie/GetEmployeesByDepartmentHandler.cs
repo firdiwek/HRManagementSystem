@@ -19,6 +19,12 @@ namespace HR.Management.Core.Application.Features.Employees.Handlers.Querie
             return employees.Select(e => new EmployeeDto
             {
                 // Mapping logic here...
+            Id = e.Id,
+            FirstName = e.FirstName,
+            LastName = e.LastName,
+            EmailAddress = e.EmailAddress,
+            DepartmentId = e.DepartmentId,
+            // DepartmentName = e.Department.Name
             }).ToList();
         }
     }

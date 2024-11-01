@@ -36,6 +36,12 @@ namespace HR.Management.Infrastructure.Repositories
             _context.LeaveRequests.Update(leaveRequest);
             await _context.SaveChangesAsync();
         }
+         public async Task<IEnumerable<LeaveRequest>> GetLeaveRequestsByEmployeeAsync(int employeeId)
+        {
+            return await _context.LeaveRequests
+                .Where(lr => lr.EmployeeId == employeeId)
+                .ToListAsync();
+        }
 
         public async Task DeleteLeaveRequestAsync(int id)
         {

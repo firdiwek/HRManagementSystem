@@ -1,6 +1,8 @@
+using HR.Management.Core.Domain;
 using HR.Management.Domain.Entities;
 using HR.Management.Infrastructure.Configuration;
 using HR.Management.Persistence.Configurations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +13,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
+
     // DbSets for your entities
     public DbSet<RefreshToken> RefreshTokens { get; set; }
 
@@ -20,11 +23,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<LeaveRequest> LeaveRequests { get; set; }
     public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
     public DbSet<Payroll> Payrolls { get; set; }
+    public DbSet<LeaveAllocation> leaveAllocations {get; set;}
 
     // Configure the model relationships and constraints
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+
+       
 
         // Your existing configurations
         modelBuilder.Entity<AttendanceRecord>(entity =>
@@ -44,6 +51,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.TotalHours)
                 .HasColumnType("interval");
         });
+         modelBuilder.Entity<IdentityUser>()
+           .HasIndex(u => u.Email)
+           .IsUnique();
+
 
         modelBuilder.Entity<Department>()
             .HasMany(d => d.Employees)

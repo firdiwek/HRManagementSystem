@@ -6,20 +6,22 @@ using HR.Management.Application.Features.Employees.Requests.Commands;
 using HR.Management.Application.Features.Employees.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace HR.Management.WebApi.Controllers
 {
     
     [ApiController]
-    [Authorize(Roles ="Admin , HR")]
     [Route("api/[controller]")]
+    // [Authorize(Roles ="Admin , HR")]
     public class EmployeeController : ControllerBase
     {
         private readonly IMediator _mediator;
-
-        public EmployeeController(IMediator mediator)
+        private readonly IMapper _mapper;
+        public EmployeeController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         // GET api/employee/{id}
@@ -35,15 +37,52 @@ namespace HR.Management.WebApi.Controllers
             return Ok(employee);
         }
 
-        // GET api/employee
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetAllEmployees()
-        {
-            var query = new GetAllEmployeesQuery();
-            var employees = await _mediator.Send(query);
+//         // GET api/employee
+//       [HttpGet]
+// // [Authorize(Policy = "AdminPolicy")]
+// public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetAllEmployees()
+// {
+//     var query = new GetAllEmployeesQuery();
+//     var employees = await _mediator.Send(query);
+//     var employeeDtos = _mapper.Map<List<EmployeeDto>>(employees);
 
-            return Ok(employees);
-        }
+//     return Ok(employeeDtos);
+// }
+[HttpGet]
+public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetAllEmployees()
+{
+    var query = new GetAllEmployeesQuery();
+    var employees = await _mediator.Send(query);
+
+    if (employees == null) // Check if employees is null
+    {
+        return NotFound(); // Return a 404 if no employees are found
+    }
+
+    // Manually map to EmployeeDto
+    var employeeDtos = employees.Select(emp => new EmployeeDto
+    {
+        Id = emp.Id,
+        FirstName = emp.FirstName,
+        LastName = emp.LastName,
+        DateOfBirth = emp.DateOfBirth,
+        Gender = emp.Gender,
+        EmailAddress = emp.EmailAddress,
+        PhoneNumber = emp.PhoneNumber,
+        Address = emp.Address,
+        DepartmentId = emp.DepartmentId,
+        JobTitle = emp.JobTitle,
+        ManagerId = emp.ManagerId,
+        HireDate = emp.HireDate,
+        EmploymentStatus = emp.EmploymentStatus,
+        ContractType = emp.ContractType,
+        Salary = emp.Salary
+    }).ToList();
+
+    return Ok(employeeDtos);
+}
+
+
 
         // GET api/employee/department/{departmentId}
         [HttpGet("department/{departmentId}")]

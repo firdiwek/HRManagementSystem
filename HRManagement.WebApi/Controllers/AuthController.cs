@@ -7,6 +7,8 @@ using System.Text;
 using HR.Management.Domain.Entities;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
+using MailKit;
 
 namespace HR.Management.Api.Controllers
 {
@@ -16,13 +18,14 @@ namespace HR.Management.Api.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
-         private readonly IEmailSender _emailSender;
+         private readonly IEmailService _emailService;
 
-        public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration, IEmailSender emailSender)
+        public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration,IEmailService emailService )
         {
             _userManager = userManager;
             _configuration = configuration;
-            _emailSender = emailSender;
+            _emailService= emailService;
+            
         }
 
         [HttpPost("register")]
@@ -150,39 +153,42 @@ public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto model)
 
 
 
-      [HttpPost("forgot-password")]
-    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto model)
+[HttpPost("forgot-password")]
+public async Task<IActionResult> ForgotPassword(ForgotPasswordDto model)
+{
+    var user = await _userManager.FindByEmailAsync(model.Email);
+    if (user == null)
     {
-        var user = await _userManager.FindByEmailAsync(model.Email);
-
-        if (user == null)
-            return BadRequest("Invalid email address");
-
-        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-        var resetLink = Url.Action("ResetPassword", "Auth", new { token, email = model.Email }, Request.Scheme);
-
-        await _emailSender.SendEmailAsync(user.Email, "Password Reset", $"Please reset your password using this link: {resetLink}");
-
-        return Ok(new { Message = "Password reset link sent" });
+        return BadRequest("User with this email does not exist.");
     }
+
+    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+    var resetLink = Url.Action("ResetPassword", "Auth", new { token, email = user.Email }, Request.Scheme);
+
+    string emailBody = $"<h2>Password Reset Request</h2><p>Click <a href='{resetLink}'>here</a> to reset your password</p>";
+    
+    await _emailService.SendEmailAsync(user.Email, "Reset Password", emailBody);
+
+    return Ok("Password reset link has been sent to your email.");
+}
+
 
 
 
 
 [HttpPost("reset-password")]
-public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto model)
+public async Task<IActionResult> ResetPassword(ResetPasswordDto model)
 {
     var user = await _userManager.FindByEmailAsync(model.Email);
-
     if (user == null)
-        return BadRequest("Invalid email address");
+        return BadRequest("User not found");
 
-    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
+    var resetPassResult = await _userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
 
-    if (!result.Succeeded)
-        return BadRequest(result.Errors);
+    if (!resetPassResult.Succeeded)
+        return BadRequest(resetPassResult.Errors);
 
-    return Ok(new { Message = "Password reset successful" });
+    return Ok("Password reset successful");
 }
 
 
@@ -270,7 +276,7 @@ public async Task<IActionResult> VerifyEmail()
     var message = $"Please verify your email using this link: {verificationLink}";
 
     // You can use any email sending logic, for example, SMTP or an external service
-    await _emailSender.SendEmailAsync(email, subject, message); 
+    await _emailService.SendEmailAsync(email, subject, message); 
 }
 
 
@@ -362,18 +368,26 @@ public async Task<IActionResult> AssignRole([FromBody] AssignRoleDto model)
         public string NewPassword { get; set; }=string.Empty;
     }
 
-    public class ResetPasswordDto
-    {
-    public string Email { get; set; }=string.Empty;
+   public class ResetPasswordDto
+{
+    [Required]
     public string Token { get; set; }=string.Empty;
+
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }=string.Empty;
+
+    [Required]
+    [MinLength(6)]
     public string NewPassword { get; set; }=string.Empty;
-    }
+}
 
-    public class ForgotPasswordDto
-    {
-        public string Email { get; set; }=string.Empty;
-
-    }
+   public class ForgotPasswordDto
+{
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
+}
 
     public class RefreshTokenDto
     {

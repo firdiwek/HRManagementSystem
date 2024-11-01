@@ -98,27 +98,25 @@ namespace HR.Management.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<PagedResult<Employee>> GetPagedEmployeesAsync(int page, int pageSize)
-        {
-            var query = _context.Employees.AsQueryable();
+       public async Task<PagedResult<Employee>> GetPagedEmployeesAsync(int page, int pageSize)
+{
+    var totalRecords = await _context.Employees.CountAsync();
+    
+    var employees = await _context.Employees
+        .OrderBy(e => e.Id) // You may want to order by a specific field
+        .Skip((page - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
 
-            var result = new PagedResult<Employee>
-            {
-                CurrentPage = page,
-                PageSize = pageSize,
-                TotalRecords = await query.CountAsync()
-            };
+    return new PagedResult<Employee>
+    {
+        Items = employees,
+        TotalRecords = totalRecords,
+        CurrentPage = page,
+        PageSize = pageSize
+    };
+}
 
-            var pageCount = (double)result.TotalRecords / pageSize;
-            result.TotalRecords = (int)Math.Ceiling(pageCount);
-
-            result.Items = await query
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            return result;
-        }
 
         public async Task<PagedResult<Employee>> GetTotalEmployeesCountAsync()
         {

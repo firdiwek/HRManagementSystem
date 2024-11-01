@@ -5,7 +5,6 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-
 public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeCommand, int>
 {
     private readonly ILeaveTypeRepository _leaveTypeRepository;
@@ -25,8 +24,10 @@ public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeComm
             CreatedDate = DateTime.UtcNow
         };
 
+        // Add the leave type to the repository
         await _leaveTypeRepository.AddAsync(leaveType);
 
-        return leaveType.Id;
+        // Return the generated ID (this should now have a valid value)
+        return leaveType.Id; // The ID should now be populated after saving
     }
 }

@@ -56,5 +56,6 @@ namespace HR.Management.WebApi.Controllers
             await _mediator.Send(new DeleteAttendanceRecordCommand { Id = id });
             return NoContent();
         }
+        
     }
 }

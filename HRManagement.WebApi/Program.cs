@@ -14,24 +14,42 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.Options;
+using HRManagement.Infrastructure.Services;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 
 // Configure Entity Framework Core with Npgsql
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnectionForHR")));
 
+// Configure Email Settings
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 
-builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-// Add Identity services
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-
-    // Add JWT Authentication
+// Add JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 builder.Services.AddAuthentication(options =>
 {
@@ -44,53 +62,40 @@ builder.Services.AddAuthentication(options =>
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        
         ValidIssuer = jwtSettings["Issuer"],
         ValidAudience = jwtSettings["Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
     };
 });
 
-
-
-
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
     options.AddPolicy("HRPolicy", policy => policy.RequireRole("HR"));
 });
+
 // Other service configurations
 builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-        options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
-    });
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+        });
 
-builder.Services.AddControllers();
+
 builder.Services.AddAutoMapper(typeof(MappingProfile)); // Register the AutoMapper profile
 builder.Services.AddMediatR(typeof(GetEmployeeByIdQuery).Assembly);
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<ILeaveRequestRepository, LeaveRequestRepository>();
-// builder.Services.AddMediatR(typeof(GetLeaveRequestByIdQuery).Assembly);
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IPayrollRepository, PayrollRepository>();
-builder.Services.AddScoped<ILeaveTypeRepository,LeaveTypeRepository>();
-builder.Services.AddMediatR(typeof(GetDepartmentByIdHandler).Assembly);
+builder.Services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
 builder.Services.AddTransient<IAttendanceRecordRepository, AttendanceRecordRepository>();
-builder.Services.AddMediatR(typeof(CreateAttendanceRecordCommand).Assembly);
-
-
-
-
-
-
-
 
 
 // Add Swagger services
@@ -102,10 +107,6 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1",
         Description = "API documentation for the HR Management System."
     });
-    // Optionally, include XML comments if you have them for additional documentation
-    // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    // c.IncludeXmlComments(xmlPath);
 
     // Add JWT authentication support in Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -116,7 +117,8 @@ builder.Services.AddSwaggerGen(c =>
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer"
     });
-     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme
@@ -133,13 +135,15 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+app.UseCors("AllowAllOrigins");
+
 // Seed roles and users here
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
     {
-        // Call the seeding method
         await ApplicationDbContextSeed.SeedRolesAndUsers(services);
     }
     catch (Exception ex)
@@ -148,11 +152,6 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "An error occurred while seeding the database.");
     }
 }
-
-
-
-
-
 
 if (app.Environment.IsDevelopment())
 {
